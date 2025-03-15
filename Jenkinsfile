@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker build -t $IMAGE_NAME .'
-                    sh 'docker tag $IMAGE_NAME sajidcurious/learn:latest'
+                    sh 'docker tag $IMAGE_NAME sajidcurious/learn'
                 }
             }
         }
