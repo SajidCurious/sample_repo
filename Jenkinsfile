@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'sajidcurious/learn'
+        IMAGE_NAME = 'learn_jenkins'
         DOCKER_CREDENTIALS_ID = '1b667c96-e806-480e-91a4-1f508a2a0a63'
     }
 
@@ -17,6 +17,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker build -t $IMAGE_NAME .'
+                    sh 'docker tag $IMAGE_NAME sajidcurious/learn:latest'
                 }
             }
         }
@@ -24,7 +25,7 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 withDockerRegistry([credentialsId: DOCKER_CREDENTIALS_ID]) {
-                    sh 'docker push $IMAGE_NAME:latest'
+                    sh 'docker push $IMAGE_NAME'
                 }
             }
         }
