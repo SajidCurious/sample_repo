@@ -17,7 +17,6 @@ pipeline {
             steps {
                 script {
                     sh 'docker build -t $IMAGE_NAME .'
-                    sh 'docker tag $IMAGE_NAME sajidcurious/learn:latest'
                 }
             }
         }
@@ -25,7 +24,7 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 withDockerRegistry([credentialsId: DOCKER_CREDENTIALS_ID]) {
-                    sh 'docker push $IMAGE_NAME'
+                    sh 'docker push $IMAGE_NAME:latest'
                 }
             }
         }
